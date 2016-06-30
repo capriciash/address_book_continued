@@ -4,17 +4,18 @@ function Contact(first,last) {
   this.lastName = last;
   this.addresses = [];
 }
-function Address(street, city,state, country) {
+function Address(street, city,state, country, kind) {
   this.street = street;
   this.city = city;
   this.state = state;
   this.country = country;
+  this.kind = kind;
 }
 Contact.prototype.fullName = function() {
   return this.firstName + " " + this.lastName;
 }
 Address.prototype.fullAddress = function() {
-  return this.street + ", " + this.city + ", " + this.state + ", " + this.country;
+  return this.street + ", " + this.city + ", " + this.state + ", " + this.country + ", " + this.kind;
 }
 
 //user interface logic
@@ -28,6 +29,7 @@ $(document).ready(function() {
 $("input.new-city").val("");
 $("input.new-state").val("");
 $("input.new-country").val("");
+$("input.new-kind").val("");
 }
   $("#add-address").click(function() {
     $("#new-addresses").append('<div class="new-address">' +
@@ -41,6 +43,9 @@ $("input.new-country").val("");
                                  '<div class="form-group">' +
                                    '<label for="new-state">State</label>' +
                                    '<input type="text" class="form-control new-state">' +
+                                 '</div>' +'<div class="form-group">' +
+                                   '<label for="new-kind">Type</label>' +
+                                   '<input type="text" class="form-control new-kind">' +
                                  '</div>' +
                                '</div>');
   });
@@ -58,7 +63,8 @@ $("input.new-country").val("");
       var inputtedCity = $(this).find("input.new-city").val();
       var inputtedState = $(this).find("input.new-state").val();
       var inputtedCountry = $(this).find("input.new-country").val();
-      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState, inputtedCountry);
+      var inputtedKind = $(this).find("input.new-kind").val();
+      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState, inputtedCountry, inputtedKind);
       newContact.addresses.push(newAddress);
     });
 
